@@ -2,7 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import catlogo from "../assets/catlogo.jpg";
 import Button from "react-bootstrap/Button";
+import { useNavigate } from "react-router-dom";
 const Home = () => {
+  const navigate = useNavigate();
+
+  const handleClickButton = () => {
+    navigate("/question");
+  };
   return (
     <Wrapper>
       <Header>예비집사 판별기</Header>
@@ -17,7 +23,12 @@ const Home = () => {
           />
         </LogoImage>
         <Desc>MBTI를 기반으로 하는 나랑 잘맞는 고양이 찾기!</Desc>
-        <Button>테스트 시작하기</Button>
+        <Button
+          style={{ fontFamily: "HSSantokki-Regular" }}
+          onClick={handleClickButton}
+        >
+          테스트 시작하기
+        </Button>
       </Contents>
     </Wrapper>
   );
@@ -42,11 +53,13 @@ const Header = styled.div`
   display: flex; //Flex 아이템들은 가로 방향으로 배치되고, 자신이 가진 내용물의 width 만큼만 차지
   justify-content: center; //중앙배치
   align-items: center;
+  font-family: "HSSantokki-Regular";
 `;
 
 const Title = styled.div`
   font-size: 30pt;
   margin-top: 40px;
+  font-family: "HSSantokki-Regular";
 `;
 
 const LogoImage = styled.div`
@@ -56,4 +69,6 @@ const LogoImage = styled.div`
 const Desc = styled.div`
   font-size: 20pt;
   margin-top: 20px;
+  font-family: "HSSantokki-Regular";
+  margin-bottom: 20px;
 `;
