@@ -22,6 +22,7 @@ const Result = () => {
         <Title>결과보기</Title>
         <LogoImage>
           <img
+            alt="고양이 사진"
             src={resultData.image}
             className="rounded-circle"
             width={350}
@@ -31,7 +32,7 @@ const Result = () => {
         <Desc>
           예비 집사님과 찰떡궁합인 고양이는 "{resultData.name}" 입니다!
         </Desc>
-        <Descs>설명: {resultData.desc}</Descs>
+        <Descs> 설명: {resultData.desc}</Descs>
         <Button
           style={{ fontFamily: "HSSantokki-Regular" }}
           onClick={() => navigate("/")}
