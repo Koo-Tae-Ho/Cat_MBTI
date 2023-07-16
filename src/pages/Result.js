@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Button from "react-bootstrap/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { ResultData } from "../assets/data/resultdata";
 
 const Result = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const mbti = searchParams.get("mbti");
+  //최종적으로 도출한 결과객체
+  const [resultData, setResultData] = useState({});
 
+  useEffect(() => {
+    const result = ResultData.find((s) => s.best === mbti);
+    setResultData(result);
+  }, [mbti]);
   return (
     <Wrapper>
       <Header>예비집사 판별기</Header>
@@ -14,15 +22,16 @@ const Result = () => {
         <Title>결과보기</Title>
         <LogoImage>
           <img
-            src={ResultData[0].image}
+            src={resultData.image}
             className="rounded-circle"
             width={350}
             height={350}
           />
         </LogoImage>
         <Desc>
-          예비 집사님과 찰떡궁합인 고양이는 "{ResultData[0].name}" 입니다!
+          예비 집사님과 찰떡궁합인 고양이는 "{resultData.name}" 입니다!
         </Desc>
+        <Descs>설명: {resultData.desc}</Descs>
         <Button
           style={{ fontFamily: "HSSantokki-Regular" }}
           onClick={() => navigate("/")}
@@ -71,4 +80,13 @@ const Desc = styled.div`
   margin-top: 20px;
   font-family: "HSSantokki-Regular";
   margin-bottom: 20px;
+`;
+
+const Descs = styled.div`
+  font-size: 20pt;
+  margin-top: 20px;
+  font-family: "HSSantokki-Regular";
+  margin-bottom: 20px;
+  background-color: rgb(240, 240, 240);
+  word-wrap: break-word;
 `;
